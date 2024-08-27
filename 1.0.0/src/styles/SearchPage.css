@@ -1,0 +1,18 @@
+.st-search {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  padding: 10px 25px;
+  color: white;
+}
+
+.st-search-movies {
+  width: 100%;
+  display: grid;
+  gap: 32px;
+}
+
+@media (width > 400px) {
+  .st-search-movies {
+    grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+  }
+}

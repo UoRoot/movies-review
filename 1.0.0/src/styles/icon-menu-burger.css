@@ -1,0 +1,121 @@
+.menu-icon-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 36px;
+    cursor: pointer;
+
+
+    .bar-1,
+    .bar-2,
+    .bar-3 {
+        width: 100%;
+        height: 4px;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .bar-1 {
+        margin-top: 5px;
+    }
+
+    .bar-3 {
+        margin-bottom: 5px;
+    }
+}
+
+.menu-icon-burger.rev-animation {
+    .bar-1 {
+        animation: reversetranslateBar1 .5s forwards;
+    }
+
+    .bar-3 {
+        animation: reversetranslateBar3 .5s forwards;
+    }
+}
+
+.menu-icon-burger.equis {
+    padding: 0;
+
+    .bar-1 {
+        animation: translateBar1 0.5s forwards;
+    }
+
+    .bar-2 {
+        transition: transform ease;
+        transition-delay: 300ms;
+        transform: scale(0);
+    }
+
+    .bar-3 {
+        animation: translateBar3 0.5s forwards;
+    }
+
+}
+
+@keyframes translateBar1 {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(11px) rotate(0);
+    }
+
+    100% {
+        transform: translateY(11px) rotate(45deg);
+    }
+}
+
+@keyframes translateBar3 {
+    0% {
+        transform: translateY(0) rotate(0)
+    }
+
+    50% {
+        transform: translateY(-11px) rotate(0);
+    }
+
+    100% {
+        transform: translateY(-11px) rotate(135deg);
+    }
+}
+
+@keyframes reversetranslateBar1 {
+    0% {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    80% {
+        transform: translateY(11px) rotate(0);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0)
+    }
+}
+
+@keyframes reversetranslateBar3 {
+    0% {
+        transform: translateY(-11px) rotate(135deg);
+    }
+
+    80% {
+        transform: translateY(-11px) rotate(0);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+}
+
+@keyframes translateMenuNav {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
