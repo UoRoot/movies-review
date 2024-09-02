@@ -1,0 +1,64 @@
+/* Card.jsx */
+
+.card {
+  max-width: 175px;
+  border-radius: 6px;
+  margin: 0 auto;
+  cursor: pointer;
+
+  padding: 2px;
+  background-color: var(--color-fondo-1);
+
+  &:hover {
+    background-color: #353535;
+
+    img {
+      transform: scale(1.1);
+    }
+
+    figcaption {
+      color: var(--text-hover);
+    }
+  }
+}
+
+.cardFig {
+  &>div {
+    height: 200px;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    font-family: sans-serif;
+
+    &>img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    &>span {
+      position: absolute;
+      display: block;
+      padding: 2px 5px;
+      top: 0;
+      background: var(--color-gradient-2);
+      color: var(--text-color-1);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 0 6px;
+      right: 0;
+    }
+
+  }
+
+  &>figcaption {
+    height: 45px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+}

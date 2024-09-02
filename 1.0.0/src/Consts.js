@@ -1,6 +1,6 @@
 const URL_PATH_API = "https://api.themoviedb.org/3";
 const URL_SECTION_MOVIES = "https://api.themoviedb.org/3/movie/";
-const API_KEY = "tu_api_key";
+const API_KEY = "f5283af760ac82370edbc58a2e5fd4a2";
 const LANGUAGE = "language=es"
 
 export const SECTIONS_MOVIES = {

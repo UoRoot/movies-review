@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  background: rgb(32, 39, 55);
+}
+
+:root {
+  --color-fondo-1: rgb(23, 33, 54);
+  --color-fondo-2: linear-gradient(to bottom, rgb(10, 24, 40), rgb(23, 36, 55));
+
+  --color-gradient-1: linear-gradient(to right, rgb(0, 255, 208), rgb(4, 176, 255));
+  --color-gradient-2: linear-gradient(to right, rgb(0, 187, 255), rgb(0, 206, 252));
+  --text-color-1: rgb(255, 255, 255);
+  --text-color-2: #637a7a;
+  --text-hover: oklch(68.53% 0.217 245.65);
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--color-fondo-2);
+  position: relative;
+  border-right: 1px solid #425555;
+  border-left: 1px solid #425555;
+}
+
+/* HEADER  */
+.hd-moviesReview {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: var(--color-fondo-1);
+  padding: 0 20px;
+  color: var(--text-color-1);
+  font-family: Cambria, Cochin, Georgia;
+}
+
+.hd-moviesReview-title {
+  display: none;
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--color-gradient-1);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hd-moviesReview-container {
+  display: none;
+}
+
+.hd-moviesReview-container-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.hd-moviesReview-container-nav>a {
+  color: var(--text-color-1);
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.hd-moviesReview-container-nav>a:hover {
+  color: var(--text-hover);
+  text-decoration: underline;
+}
+
+.hd-moviesReview-container-nav .link-active {
+  color: var(--text-hover);
+  text-decoration: underline;
+}
+
+
+/* MENU HAMBURGUESA */
+
+.hd-moviesReview-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  inset: 60px 0 0 0;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.hd-moviesReview-menu-nav {
+  width: 50%;
+  height: calc(100vh - 60px);
+  background-color: #bfbfbf;
+  transform: translateX(-100%);
+
+  &>a {
+    display: block;
+    height: 30px;
+
+    &:hover {
+      background-color: #353535;
+    }
+  }
+}
+
+.hd-moviesReview-menu.active {
+  display: block;
+
+  .hd-moviesReview-menu-nav {
+    animation: translateMenuNav 0.4s ease forwards;
+  }
+}
+
+/* ALTURA PARA CADA PAGINA*/
+.height-page {
+  min-height: calc(100vh - 60px);
+}
+
+
+/* CONTENEDOR DE LAS Card.jsx */
+.st-entertainment {
+  display: grid;
+  justify-content: center;
+  color: aliceblue;
+}
+
+/* RIGTH CONTAINER */
+.st-entertainment-links {
+  padding: 10px 15px;
+  grid-column: 7/9;
+  height: 100%;
+  display: none;
+  border-left: 1px solid rgb(50, 50, 50);
+
+  .st-left-title {
+    font-family: Mulish;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+}
+
+.content-list a {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+
+  color: var(--text-color-2);
+  line-height: 1.5rem;
+  font-family: Mulish;
+  font-weight: 400;
+  font-size: 14px;
+
+  &>span {
+    display: block;
+  }
+
+  &:hover {
+    color: var(--text-color-1);
+  }
+}
+
+
+
+.st-entertainment-cards-ct {
+  display: grid;
+  justify-content: center;
+  gap: 1rem 1rem;
+}
+
+/* LEFT CONTAINER */
+.st-entertainment-cards {
+  display: flex;
+  flex-direction: column;
+  /* gap: 30px; */
+  padding: 20px 15px;
+}
+
+.st-search {
+  padding: 20px 30px;
+}
+
+.st-entertainment-search {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+  gap: 1rem;
+  /* justify-content: center; */
+}
+
+/* Title of st-entertainment-cards */
+
+.section-movies-title {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  grid-row: 1;
+}
+
+/* Card.jsx */
+
+/* .card {
+  max-width: 175px;
+  border-radius: 6px;
+  margin: 0 auto;
+  cursor: pointer;
+
+  padding: 2px;
+  background-color: var(--color-fondo-1);
+}
+
+.card-fig {
+  &>div {
+    height: 200px;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    font-family: sans-serif;
+
+    &>img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    &>span {
+      position: absolute;
+      display: block;
+      padding: 2px 5px;
+      top: 0;
+      background: var(--color-gradient-2);
+      color: var(--text-color-1);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 0 6px;
+      right: 0;
+    }
+
+  }
+
+  &>figcaption {
+    height: 45px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+}
+
+.card:hover {
+  background-color: #353535;
+
+  & img {
+    transform: scale(1.1);
+  }
+
+  & figcaption {
+    color: var(--text-hover);
+  }
+} */
+
+
+.ct-center {
+  height: 100px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  color: #FFF;
+  border: none;
+  border-radius: 99999px;
+  background-color: #09f;
+  padding: 7px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+/* FORMULARIO PARA FILTRAR PELICULAS */
+.formFilter {
+  padding: 10px 25px;
+  font-size: 17px;
+
+  .form-title {
+    color: var(--text-color-2);
+    margin-bottom: 20px;
+  }
+
+  .btn-form {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+  }
+}
+
+.formFilter .form-flex {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+
+  .options {
+    width: 100px;
+    padding: 3px 6px;
+    border: none;
+    font-weight: bold;
+    border-radius: 0px 6px 0px 6px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-family: Mulish, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+}
+
+.formFilter .form-block {
+  &>div {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .rating-value {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    width: 36px;
+    padding: 3px 0;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (width > 400px) {
+
+  /* SECTION MOVIES */
+  .st-entertainment {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  .st-entertainment-cards-ct {
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  }
+
+  .st-entertainment-cards {
+    grid-column: 1/9;
+  }
+
+}
+
+@media (width > 900px) {
+
+  /* HEADER */
+  .hd-moviesReview-title {
+    font-size: 1.8rem;
+    display: block;
+  }
+
+  .hd-moviesReview-container {
+    display: block;
+  }
+
+  .menu-icon-burger,
+  .menu-icon-burger.rev-animation,
+  .menu-icon-burger.equis {
+    display: none;
+  }
+
+  .hd-moviesReview-burger {
+    display: none;
+  }
+
+
+  /* SECTION MOVIES */
+  .st-entertainment-links {
+    display: block;
+    /* display: none; */
+  }
+
+  .st-entertainment-cards {
+    grid-column: 1/7;
+  }
+}
