@@ -65,18 +65,6 @@ export type MovieType = {
 };
 
 /**
- * Represents the response structure of a search for movies and tv series by genre.
- * Extends the base paginated response structure to include the genre id.
- */
-export type MoviesGenreResponse = {
-  id: number;
-  page: number;
-  results: Result[];
-  total_pages: number;
-  total_results: number;
-};
-
-/**
  * Represents the response structure of the details of a movie.
  */
 export type MovieDetailsResponse = {

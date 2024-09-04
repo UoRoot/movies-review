@@ -12,3 +12,14 @@ export interface GenreType {
   id: number;
   name: string;
 }
+
+/**
+ * Represents the response structure of a search for movies and tv series by genre.
+ */
+export type MediaByGenreResponse = {
+  id: number;
+  page: number;
+  results: MovieType[] | TvSerieType;
+  total_pages: number;
+  total_results: number;
+};

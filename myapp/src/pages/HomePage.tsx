@@ -1,5 +1,5 @@
 import { SectionLinks } from "../components/sectionLinks.jsx";
-import { useGenres } from "../hooks/useGenres.ts";
+import { useGenresBy } from "../hooks/use-genres-by.ts";
 import { SwiperAutoplay } from "../components/SliderAutoplay.js";
 import { Link } from "react-router-dom";
 import { useListOfMovies } from "../hooks/use-list-of-movies.ts";
@@ -10,8 +10,7 @@ export function HomePage() {
   const { movies: nowPlaying } = useListOfMovies({ type: "now_playing" });
   const { movies: topRated } = useListOfMovies({ type: "top_rated" });
   const { movies: popularMovies } = useListOfMovies({ type: "popular" });
-  const { mappedGenres: genres } = useGenres("movie"); // ✔
-  // const { mappedSeries: popularTv } = useSeries({ url: 'https://api.themoviedb.org/3/tv/popular?api_key=f5283af760ac82370edbc58a2e5fd4a2&language=es-MX' })
+  const { mappedGenres: genres } = useGenresBy("movie"); // ✔
 
   return (
     <main className="st-entertainment height-page">
