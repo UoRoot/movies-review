@@ -16,13 +16,15 @@ import {
  */
 export function useListOfMovies(type: TypeOfListMovies) {
   const [movies, setMovies] = useState<MovieType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const searchMovies = async () => {
+    const fetchMovies = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch(getUrlListOfMovie(type));
-        if (!response.ok) throw new Error("Error when searching for peliculas");
+        if (!response.ok) throw new Error("Error when searching for movies");
         const { results }: PaginatedMovieResponse = await response.json();
         setMovies(results);
       } catch (err) {
@@ -31,11 +33,13 @@ export function useListOfMovies(type: TypeOfListMovies) {
         } else {
           setError("An unexpected error occurred");
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    searchMovies();
+    fetchMovies();
   }, [type]);
 
-  return { movies, error };
+  return { movies, error, isLoading };
 }

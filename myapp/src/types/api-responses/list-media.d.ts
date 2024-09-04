@@ -10,6 +10,12 @@ export type TypeOfListMovies =
   | "now_playing"
   | "upcoming";
 
+export type TypeOfListSeries =
+  | "airing_today"
+  | "on_the_air"
+  | "popular"
+  | "top_rated";
+
 /**
  * Represents the base structure for a paginated response from the TMDB API.
  * This structure includes metadata such as the current page, total pages, and total results.
