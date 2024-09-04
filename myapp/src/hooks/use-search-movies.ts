@@ -5,18 +5,10 @@ import {
   PaginatedMovieResponse,
 } from "../types/api-responses/list-media";
 
-interface ReturnCustomHook {
-  movies: MovieType[];
-  isLoading: boolean;
-}
-
-export default function useSeacrhMovie({
-  query,
-}: {
-  query: string;
-}): ReturnCustomHook {
+export default function useSeacrhMovie({ query }: { query: string }) {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const searchMovies = async () => {
@@ -25,10 +17,15 @@ export default function useSeacrhMovie({
         const response = await fetch(
           getUrlSearchByMedia({ type: "movie", query })
         );
+        if (!response.ok) throw new Error("Error when searching for series");
         const { results }: PaginatedMovieResponse = await response.json();
         setMovies(results);
-      } catch (error) {
-        throw new Error("Error when searching for movies: " + error);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -40,5 +37,6 @@ export default function useSeacrhMovie({
   return {
     movies,
     isLoading,
+    error,
   };
 }

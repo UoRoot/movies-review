@@ -3,8 +3,9 @@ import { toListMediaCard } from "../mappers/movie-mapper.js";
 import { MediaCard } from "./ui/cards/media-card.js";
 
 export function FindMovies({ query }: { query: string }) {
-  const { isLoading, movies } = useSeacrhMovie({ query });
+  const { isLoading, movies, error } = useSeacrhMovie({ query });
   if (isLoading) return <h1>Cargando...</h1>;
+  if (error) return <h1>Error: {error}</h1>;
 
   const mappedMovies = toListMediaCard(movies);
   return (
