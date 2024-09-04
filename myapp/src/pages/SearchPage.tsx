@@ -1,6 +1,7 @@
 import "../styles/SearchPage.css";
-import { FindMovies } from "../components/FindMovies";
+import { FindMovies } from "../components/find-movies";
 import { useParams } from "react-router-dom";
+import { FindSeries } from "../components/find-series";
 
 export function SearchPage() {
   const { query } = useParams() as { query: string };
@@ -8,7 +9,7 @@ export function SearchPage() {
   return (
     <main className="st-search">
       <FindMovies query={query} />
-      {/* <FindMovies items={mappedSeries} type='Series' search={query} /> */}
+      <FindSeries query={query} />
     </main>
   );
 }

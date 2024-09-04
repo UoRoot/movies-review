@@ -1,14 +1,18 @@
 import { IMAGE_PATH } from "../Consts";
-import { TypeTv } from "../types/audiovisual-media.type";
 
-export function tvMapper(media: TypeTv[]) {
-  return media?.map(({ id, name, poster_path }) => ({
+import NotFoundImage from "../assets/not-found.png";
+import { TvSerieType } from "../types/api-responses/list-media";
+import { MediaCard } from "../types/local-type/media";
+
+export function toMediaCard({ id, name, poster_path }: TvSerieType): MediaCard {
+  return {
     id,
     title: name,
-    image:
-      poster_path !== null
-        ? `${IMAGE_PATH}${poster_path}`
-        : "https://th.bing.com/th/id/R.8694e4ba0f67d601947b3431297fc2e6?rik=U%2fsXad%2foFXnS4g&pid=ImgRaw&r=0",
+    image: poster_path !== null ? `${IMAGE_PATH}${poster_path}` : NotFoundImage,
     type: "movie",
-  }));
+  };
+}
+
+export function toListMediaCard(media: TvSerieType[]): MediaCard[] {
+  return media.map(toMediaCard);
 }
