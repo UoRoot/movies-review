@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react";
 import { URL_GET_GENRES_FOR, URL_MOVIES_BY_GENRE } from "../Consts.ts";
-import { MediaType } from "../types/local-type/media";
+import { CountMediaByGenre, MediaType } from "../types/local-type/media";
 import {
   GenreListResponse,
   MediaByGenreResponse,
 } from "../types/api-responses/genres";
 
-interface CountMediaByGenre {
-  id: number;
-  name: string;
-  count: number;
-}
-
+/**
+ * Custom Hook: useGenresBy
+ *
+ * This custom hook is used to get all genres of movies or TV series,
+ * along with the total count of results for each genre.
+ *
+ * @param {MediaType} type - Type of media for which you want to get the genres. Can be 'movie' or 'tv'.
+ * @returns - An object containing an array of objects with the genres and the total number of results per genre.
+ *
+ * @example
+ * // Ejemplo de uso en un componente:
+ * const { mappedGenres } = useGenresBy('movie');
+ *
+ * useEffect(() => {
+ *   console.log(mappedGenres);
+ *   // Output: [{ id: 28, name: 'Action', count: 3421 }, { id: 35, name: 'Comedy', count: 2841 }, ...]
+ * }, [mappedGenres]);
+ */
 export function useGenresBy(type: MediaType) {
   const [mappedGenres, setMappedGenres] = useState<CountMediaByGenre[]>([]);
 

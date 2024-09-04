@@ -6,3 +6,9 @@ export interface MediaCard {
   image: string;
   type: string;
 }
+
+interface CountMediaByGenre {
+  id: number;
+  name: string;
+  count: number;
+}

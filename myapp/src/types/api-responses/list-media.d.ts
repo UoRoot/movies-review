@@ -4,7 +4,7 @@
 
 import { GenreType } from "./genres";
 
-export type ListMoviesType =
+export type TypeOfListMovies =
   | "popular"
   | "top_rated"
   | "now_playing"

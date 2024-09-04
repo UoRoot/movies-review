@@ -5,7 +5,13 @@ import {
   PaginatedMovieResponse,
 } from "../types/api-responses/list-media";
 
-export default function useSeacrhMovie({ query }: { query: string }) {
+/**
+ * This custom hook retrieves a list of movies based on the search query provided.
+ *
+ * @param {string} query - The search query to be used to fetch the movies.
+ * @returns - An object containing the fetched movies, the loading status and any errors.
+ */
+export default function useSeacrhMovie(query: string) {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

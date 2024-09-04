@@ -7,9 +7,9 @@ import { toListMediaCard } from "../mappers/movie-mapper.ts";
 import { SectionMovies } from "../components/sectionMovies.tsx";
 
 export function HomePage() {
-  const { movies: nowPlaying } = useListOfMovies({ type: "now_playing" });
-  const { movies: topRated } = useListOfMovies({ type: "top_rated" });
-  const { movies: popularMovies } = useListOfMovies({ type: "popular" });
+  const { movies: nowPlaying } = useListOfMovies("now_playing");
+  const { movies: topRated } = useListOfMovies("top_rated");
+  const { movies: popularMovies } = useListOfMovies("popular");
   const { mappedGenres: genres } = useGenresBy("movie"); // ✔
 
   return (
