@@ -8,22 +8,8 @@ const LANGUAGE = "language=es";
 /* LIST OF MOVIES */
 export const getUrlListOfMovie = (type: string) =>
   `${API_URL}/movie/${type}?${API_KEY}&${LANGUAGE}`;
-// export const SECTIONS_MOVIES = {
-//   nowPlaying: {
-//     title: "Lo más nuevo",
-//     urlApi: `${URL_MOVIES_LIST}/now_playing?${API_KEY}&${LANGUAGE}`,
-//   },
-
-//   topRated: {
-//     title: "Recomendados",
-//     urlApi: `${URL_MOVIES_LIST}/top_rated?${API_KEY}&${LANGUAGE}`,
-//   },
-
-//   popularMovies: {
-//     title: "Populares",
-//     urlApi: `${URL_MOVIES_LIST}/popular?${API_KEY}&${LANGUAGE}`,
-//   },
-// };
+export const getUrlListOfSerie = (type: string) =>
+  `${API_URL}/tv/${type}?${API_KEY}&${LANGUAGE}`;
 
 /* URL PATH TO GET AN IMAGE */
 export const IMAGE_PATH = "https://image.tmdb.org/t/p/original/";
