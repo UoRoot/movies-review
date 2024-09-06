@@ -7,11 +7,44 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import type { MovieType } from "../types/api-responses/list-media";
 import { IMAGE_PATH } from "../Consts";
+import { useListOfMovies } from "../hooks/use-list-of-movies";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-export function SwiperAutoplay({ movies }: { movies: MovieType[] }) {
-  if (movies.length === 0) return <h1>Loading...</h1>;
+function SwiperSkeleton() {
+  return (
+    <SkeletonTheme baseColor="#383e48" highlightColor="#424750">
+      <div
+        style={{
+          borderRadius: "12px",
+          overflow: "hidden",
+          backgroundColor: "#202737",
+        }}
+      >
+        <Skeleton height={270} />
+        <div
+          style={{
+            height: "80px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            padding: "10px 16px",
+          }}
+        >
+          <Skeleton style={{ width: "60%" }} />
+          <div>
+            <Skeleton count={2} />
+          </div>
+        </div>
+      </div>
+    </SkeletonTheme>
+  );
+}
+
+export function SwiperAutoplay() {
+  const { movies, isLoading, error } = useListOfMovies("popular");
+  if (isLoading) return <SwiperSkeleton />;
+  if (error) return null;
   const firstMovies = movies.slice(0, 10);
 
   return (
