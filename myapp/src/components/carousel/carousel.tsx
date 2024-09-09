@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "../styles/swiper.css";
+import "./swiper.css";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -7,16 +7,16 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { IMAGE_PATH } from "../Consts";
-import { useListOfMovies } from "../hooks/use-list-of-movies";
+import { useListOfMovies } from "../../hooks/use-list-of-movies";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import CarouselItem from "./carousel-item";
 
 function SwiperSkeleton() {
   return (
     <SkeletonTheme baseColor="#383e48" highlightColor="#424750">
       <div
         style={{
-          borderRadius: "12px",
+          borderRadius: "8px",
           overflow: "hidden",
           backgroundColor: "#202737",
         }}
@@ -41,7 +41,7 @@ function SwiperSkeleton() {
   );
 }
 
-export function SwiperAutoplay() {
+export function Carousel() {
   const { movies, isLoading, error } = useListOfMovies("popular");
   if (isLoading) return <SwiperSkeleton />;
   if (error) return null;
@@ -52,7 +52,7 @@ export function SwiperAutoplay() {
       spaceBetween={30}
       centeredSlides={true}
       autoplay={{
-        delay: 2500,
+        delay: 3000,
         disableOnInteraction: false,
       }}
       pagination={{
@@ -62,21 +62,9 @@ export function SwiperAutoplay() {
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper"
     >
-      {firstMovies.map(({ id, title, overview, backdrop_path }) => (
-        <SwiperSlide key={id}>
-          <aside
-            style={{ backgroundImage: `url("${IMAGE_PATH}${backdrop_path}")` }}
-          >
-            <footer className="footer-slider">
-              <div>
-                <h3>{title}</h3>
-                <p>{overview}</p>
-              </div>
-              <a href="./" className="a-btn">
-                Ver
-              </a>
-            </footer>
-          </aside>
+      {firstMovies.map((movie) => (
+        <SwiperSlide key={movie.id}>
+          <CarouselItem {...movie} />
         </SwiperSlide>
       ))}
     </Swiper>

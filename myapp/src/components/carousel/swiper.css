@@ -3,17 +3,7 @@
 .swiper {
   width: 100%;
   height: 350px;
-  border-radius: 6px;
-}
-
-.swiper-slide {
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 8px;
 }
 
 .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -35,25 +25,31 @@
 }
 
 .swiper-slide aside {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 
+  &>figure {
+    display: flex;
+    align-items: center;
+    height: 270px;
+  }
+
+  img {
+    width: 100%;
+  }
 }
 
 .footer-slider {
-  position: absolute;
-  bottom: 0;
   height: 80px;
-  background-color: var(--text-hover);
   width: 100%;
+  background-color: var(--text-hover);
 
-  color: black;
   display: flex;
   align-items: center;
+  color: black;
   font-family: 'Roboto Condensed', sans-serif;
 
   &>div {
@@ -75,6 +71,8 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
+      text-overflow: ellipsis;
     }
   }
 

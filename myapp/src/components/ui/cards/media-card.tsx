@@ -2,8 +2,31 @@ import { Link } from "react-router-dom";
 import type { MediaCard } from "../../../types/local-type/media";
 import Style from "./media-card.module.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { useIntersectionObserver } from "../../../hooks/use-intersection-observer";
+import { useEffect } from "react";
 
 export function MediaCard({ title, image, id, type }: MediaCard) {
+  const { observer, setElements, entries } = useIntersectionObserver({
+    root: null,
+    thresholds: [0.25],
+  });
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".lazyload");
+    setElements(elements);
+  }, [setElements]);
+
+  useEffect(() => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const lazyImage = entry.target;
+        lazyImage.setAttribute("src", lazyImage.getAttribute("data-src") ?? "");
+        lazyImage.classList.remove("lazyload");
+        observer.unobserve(lazyImage);
+      }
+    });
+  }, [entries, observer]);
+
   return (
     <Link
       to={
@@ -14,8 +37,17 @@ export function MediaCard({ title, image, id, type }: MediaCard) {
     >
       <div className={Style.card} title={title}>
         <figure className={Style.cardFig}>
-          <div>
-            <img src={image} alt={`Poster de ${title}`} />
+          <div className="">
+            <img
+              data-src={image}
+              className="lazyload"
+              alt={`Poster de ${title}`}
+            />
+            <Skeleton
+              baseColor="#383e48"
+              highlightColor="#424750"
+              style={{ height: "100%" }}
+            />
             <span>{type}</span>
           </div>
           <figcaption>{title}</figcaption>
