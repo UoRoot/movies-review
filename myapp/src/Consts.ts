@@ -1,5 +1,5 @@
 import { API_ENV } from "./env-config";
-import { MediaType } from "./types/local-type/media";
+import { DiscoverMediaParams, MediaType } from "./types/local-type/media";
 
 const API_URL = API_ENV.apiUrl;
 const API_KEY = "api_key=" + API_ENV.apiKey;
@@ -35,38 +35,6 @@ export const options = {
     Authorization: `Bearer ${API_ENV.headerAuthentication}`,
   },
 };
-
-/* FILTERING AUDIOVISUAL MEDIA */
-
-export function URL_FILTER_SERIES({ year, genre, rating }) {
-  if (year === "todos" && genre !== "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/tv?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&vote_average.gte=${rating}`;
-  }
-  if (year !== "todos" && genre === "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/tv?${API_KEY}&es-ES&sort_by=popularity.desc&first_air_date_year=${year}&vote_average.gte=${rating}`;
-  }
-  if (year !== "todos" && genre !== "todos" && rating === "10") {
-    return `https://api.themoviedb.org/3/discover/tv?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&first_air_date_year=${year}`;
-  }
-  if (year !== "todos" && genre !== "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/tv?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&first_air_date_year=${year}&vote_average.gte=${rating}`;
-  }
-}
-
-export function URL_FILTER_MOVIES({ year, genre, rating }) {
-  if (year === "todos" && genre !== "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/movie?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&vote_average.gte=${rating}`;
-  }
-  if (year !== "todos" && genre === "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/movie?${API_KEY}&es-ES&sort_by=popularity.desc&primary_release_year=${year}&vote_average.gte=${rating}`;
-  }
-  if (year !== "todos" && genre !== "todos" && rating === "10") {
-    return `https://api.themoviedb.org/3/discover/movie?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&primary_release_year=${year}`;
-  }
-  if (year !== "todos" && genre !== "todos" && rating !== "10") {
-    return `https://api.themoviedb.org/3/discover/movie?${API_KEY}&es-ES&sort_by=popularity.desc&with_genres=${genre}&primary_release_year=${year}&vote_average.gte=${rating}`;
-  }
-}
 
 export type FilteringParameters = {
   genre: string;
@@ -105,7 +73,41 @@ export function getUrlSearchByMedia({
   query,
 }: {
   type: MediaType;
-  query: string;
+  query?: string;
 }) {
-  return `${API_URL}/search/${type}?${API_KEY}&query=${query}`;
+  const defaultParams =
+    "&include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity.desc";
+  return (
+    API_URL +
+    "/search/" +
+    type +
+    "?" +
+    API_KEY +
+    defaultParams +
+    (query && "&query=" + query)
+  );
 }
+
+export const getUrlDiscoverMovies = (props: DiscoverMediaParams) => {
+  const { page, rating, with_genres, year, include_video, language, sort_by } =
+    props;
+  const finalUrl =
+    API_URL +
+    "/discover/movie?" +
+    API_KEY +
+    `&include_adult=false&include_video=${include_video}&language=${language}&sort_by=popularity.${sort_by}&page=${page}`;
+
+  if (with_genres.length > 0) {
+    finalUrl.concat(`&with_genres=${with_genres}`);
+  }
+
+  if (rating > 0) {
+    finalUrl.concat(`&vote_average.gte=${rating}`);
+  }
+
+  if (year !== "") {
+    finalUrl.concat(`&first_air_date_year=${year}`);
+  }
+
+  return finalUrl;
+};

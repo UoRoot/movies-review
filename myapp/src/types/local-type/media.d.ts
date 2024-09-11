@@ -12,3 +12,13 @@ interface CountMediaByGenre {
   name: string;
   count: number;
 }
+// Doc.
+export type DiscoverMediaParams = {
+  include_video: boolean;
+  language: Language;
+  page: number;
+  sort_by: string;
+  with_genres: number[];
+  rating: number;
+  year: string;
+};

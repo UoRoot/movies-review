@@ -9,7 +9,8 @@ import { HomePage } from "./pages/HomePage.js";
 // import { NotFound } from "./components/NotFound.jsx";
 // import { SeriesPage } from "./pages/SeriesPage.jsx";
 // import { DetailsPageMovie } from "./pages/DetailsPageMovie.jsx";
-// import { PeliculasPage } from "./pages/PeliculasPage.jsx";
+import { PeliculasPage } from "./pages/PeliculasPage";
+import { MoviesProvider } from "./context/movies/movies-context-provider.tsx";
 // import { DetailsPageSerie } from "./pages/DetailsPageSerie.jsx";
 
 function App() {
@@ -19,8 +20,15 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/buscar/:query" element={<SearchPage />} />
-        {/* <Route path="/peliculas" element={<PeliculasPage />} />
-        <Route path="/series" element={<SeriesPage />} />
+        <Route
+          path="/peliculas"
+          element={
+            <MoviesProvider>
+              <PeliculasPage />
+            </MoviesProvider>
+          }
+        />
+        {/* <Route path="/series" element={<SeriesPage />} />
         <Route path="/estrenos" element={<PremieresPage />} />
         <Route path="/sobre-nosotros" element={<AboutPage />} />
         <Route path="/pelicula/:id/:title" element={<DetailsPageMovie />} />
