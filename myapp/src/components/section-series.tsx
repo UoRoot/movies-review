@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useListOfSeries } from "../hooks/use-list-of-tv-series";
 import { toListMediaCard } from "../mappers/tv-mapper";
 import { TypeOfListSeries } from "../types/api-responses/list-media";
@@ -23,11 +22,6 @@ export function SectionSeries({ type, title }: Props) {
           : toListMediaCard(series).map((serie) => (
               <MediaCard key={serie.id} {...serie} />
             ))}
-      </div>
-      <div className="ct-center">
-        <Link to="/peliculas" className="button">
-          Ver todo
-        </Link>
       </div>
     </div>
   );
