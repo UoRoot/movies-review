@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import FilterForm from "../components/filterForm.jsx";
 import { toListMediaCard } from "../mappers/movie-mapper.js";
 import {
   MediaCard,
@@ -7,14 +6,15 @@ import {
 } from "../components/ui/cards/media-card.js";
 import { SectionMovies } from "../components/section-movies.js";
 import { useMoviesContext } from "../hooks/context/use-movies-context.js";
+import FilterForm from "../components/filter-movies-fom.js";
 
 function MovieSections() {
   return (
     <>
-      <SectionMovies type="now_playing" />
-      <SectionMovies type="popular" />
-      <SectionMovies type="top_rated" />
-      <SectionMovies type="upcoming" />
+      <SectionMovies type="now_playing" title="The newest" />
+      {/* <SectionMovies type="popular" title="Most viewed" />
+      <SectionMovies type="top_rated" title="Most recommended" />
+      <SectionMovies type="upcoming" title="Upcomming" /> */}
     </>
   );
 }
@@ -59,11 +59,10 @@ function LeakedMoviesSection() {
 
 export function PeliculasPage() {
   const isFiltering = useRef(false);
-  const { setFilters } = useMoviesContext();
   return (
     <main className="layout-one" style={{ color: "white" }}>
       <section className="ly-left">
-        <FilterForm handleSubmit={setFilters} />
+        <FilterForm isFiltering={isFiltering} />
       </section>
       <section className="ly-right">
         {isFiltering ? <MovieSections /> : <LeakedMoviesSection />}
