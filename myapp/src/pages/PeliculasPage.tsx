@@ -1,12 +1,10 @@
 import { useRef } from "react";
 import { toListMediaCard } from "../mappers/movie-mapper.js";
-import {
-  MediaCard,
-  MediaCardSkeleton,
-} from "../components/ui/cards/media-card.js";
+import { MediaCard } from "../components/ui/cards/media-card.js";
 import { SectionMovies } from "../components/section-movies.js";
 import { useMoviesContext } from "../hooks/context/use-movies-context.js";
 import FilterForm from "../components/filter-movies-fom.js";
+import LoadingMediaSection from "../components/loading-media-sections.js";
 
 function MovieSections() {
   return (
@@ -29,13 +27,13 @@ function LeakedMoviesSection() {
   return (
     <div className="section-movies">
       <div className="st-entertainment-cards-ct">
-        {isLoading
-          ? Array(20)
-              .fill(null)
-              .map((_, index) => <MediaCardSkeleton key={index} />)
-          : toListMediaCard(movies).map((movie) => (
-              <MediaCard key={movie.id} {...movie} />
-            ))}
+        {isLoading ? (
+          <LoadingMediaSection />
+        ) : (
+          toListMediaCard(movies).map((movie) => (
+            <MediaCard key={movie.id} {...movie} />
+          ))
+        )}
       </div>
       <div className="ct-center">
         <button

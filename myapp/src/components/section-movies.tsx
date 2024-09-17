@@ -1,7 +1,8 @@
 import { useListOfMovies } from "../hooks/use-list-of-movies";
 import { toListMediaCard } from "../mappers/movie-mapper";
 import { TypeOfListMovies } from "../types/api-responses/list-media";
-import { MediaCard, MediaCardSkeleton } from "./ui/cards/media-card";
+import LoadingMediaSection from "./loading-media-sections";
+import { MediaCard } from "./ui/cards/media-card";
 
 interface Props {
   type: TypeOfListMovies;
@@ -16,13 +17,13 @@ export function SectionMovies({ type, title }: Props) {
       {title && <h3 className="section-movies-title">{title}</h3>}
 
       <div className="st-entertainment-cards-ct">
-        {isLoading
-          ? Array(20)
-              .fill(null)
-              .map((_, index) => <MediaCardSkeleton key={index} />)
-          : toListMediaCard(movies).map((movie) => (
-              <MediaCard key={movie.id} {...movie} />
-            ))}
+        {isLoading ? (
+          <LoadingMediaSection />
+        ) : (
+          toListMediaCard(movies).map((movie) => (
+            <MediaCard key={movie.id} {...movie} />
+          ))
+        )}
       </div>
     </div>
   );
