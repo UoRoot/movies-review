@@ -1,5 +1,5 @@
 import { API_ENV } from "./env-config";
-import { DiscoverMediaParams, MediaType } from "./types/local-type/media";
+import { FilterMoviesParams, MediaType } from "./types/local-type/media";
 
 const API_URL = API_ENV.apiUrl;
 const API_KEY = "api_key=" + API_ENV.apiKey;
@@ -88,25 +88,26 @@ export function getUrlSearchByMedia({
   );
 }
 
-export const getUrlDiscoverMovies = (props: DiscoverMediaParams) => {
-  const { page, rating, with_genres, year, include_video, language, sort_by } =
-    props;
-  const finalUrl =
+export const getUrlDiscoverMovies = (props: Partial<FilterMoviesParams>) => {
+  const { page, rating, withGenres, year, language } = props;
+  let finalUrl =
     API_URL +
     "/discover/movie?" +
     API_KEY +
-    `&include_adult=false&include_video=${include_video}&language=${language}&sort_by=popularity.${sort_by}&page=${page}`;
+    `&include_adult=false&include_video=true&language=${
+      language ?? "en-US"
+    }&sort_by=popularity.desc&page=${page ?? 1}`;
 
-  if (with_genres.length > 0) {
-    finalUrl.concat(`&with_genres=${with_genres}`);
+  if (withGenres && withGenres.length > 0) {
+    finalUrl += `&with_genres=${withGenres}`;
   }
 
-  if (rating > 0) {
-    finalUrl.concat(`&vote_average.gte=${rating}`);
+  if (rating) {
+    finalUrl += `&vote_average.gte=${rating}`;
   }
 
-  if (year !== "") {
-    finalUrl.concat(`&first_air_date_year=${year}`);
+  if (year) {
+    finalUrl += `&first_air_date_year=${year}`;
   }
 
   return finalUrl;

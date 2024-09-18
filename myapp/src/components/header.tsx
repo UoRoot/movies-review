@@ -2,7 +2,7 @@ import { useMenuByWindowSize } from "../hooks/useMenuByWindowSize.js";
 import { Link, NavLink } from "react-router-dom";
 import CloseMenuIcon from "./icons/close-menu-icon";
 import OpenMenuIcon from "./icons/open-menu-icon";
-import { SearchForm } from "./ui/forms/searchForm.js";
+import { SearchForm } from "./ui/forms/search-form";
 
 export function Header() {
   const { handleMenu, menuBurgerActive, setMenuBurgerActive } =

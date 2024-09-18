@@ -22,3 +22,13 @@ export type DiscoverMediaParams = {
   rating: number;
   year: string;
 };
+
+export interface FilterMoviesParams {
+  language: Language;
+  page: number;
+  sortBy: string;
+  order: "desc" | "asc";
+  withGenres: string;
+  rating: string;
+  year: number;
+}

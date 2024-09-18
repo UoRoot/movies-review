@@ -1,10 +1,11 @@
-import { useRef } from "react";
 import { toListMediaCard } from "../mappers/movie-mapper.js";
 import { MediaCard } from "../components/ui/cards/media-card.js";
 import { SectionMovies } from "../components/section-movies.js";
-import { useMoviesContext } from "../hooks/context/use-movies-context.js";
-import FilterForm from "../components/filter-movies-fom.js";
 import LoadingMediaSection from "../components/loading-media-sections.js";
+import FilterForm from "../components/media-filters/movies/filter-fom.js";
+import { FilterMoviesParams } from "../types/local-type/media.js";
+import useDiscoverMovies from "../hooks/use-discover-movies.js";
+import { useMoviesQueryParams } from "../hooks/use-movies-query-params.js";
 
 function MovieSections() {
   return (
@@ -17,10 +18,20 @@ function MovieSections() {
   );
 }
 
-function LeakedMoviesSection() {
-  const { error, isLoading, movies, nextPage, prevPage, totalPages } =
-    useMoviesContext();
-  const curPage = useRef(1);
+function LeakedMoviesSection({
+  params,
+}: {
+  params: Partial<FilterMoviesParams>;
+}) {
+  const {
+    movies,
+    isLoading,
+    currentPage,
+    totalPages,
+    nextPage,
+    prevPage,
+    error,
+  } = useDiscoverMovies(params);
 
   if (error !== "") return <div>{error}</div>;
 
@@ -38,14 +49,14 @@ function LeakedMoviesSection() {
       <div className="ct-center">
         <button
           onClick={prevPage}
-          disabled={curPage.current < 2}
+          disabled={currentPage < 2}
           className="button"
         >
           Volver
         </button>
         <button
           onClick={nextPage}
-          disabled={curPage.current >= totalPages}
+          disabled={currentPage >= totalPages}
           className="button"
         >
           Siguiente
@@ -56,14 +67,20 @@ function LeakedMoviesSection() {
 }
 
 export function PeliculasPage() {
-  const isFiltering = useRef(false);
+  const params = useMoviesQueryParams();
+  const hasParameters = Object.keys(params).length >= 1;
+
   return (
     <main className="layout-one" style={{ color: "white" }}>
       <section className="ly-left">
-        <FilterForm isFiltering={isFiltering} />
+        <FilterForm />
       </section>
       <section className="ly-right">
-        {isFiltering ? <MovieSections /> : <LeakedMoviesSection />}
+        {hasParameters ? (
+          <LeakedMoviesSection params={params} />
+        ) : (
+          <MovieSections />
+        )}
       </section>
     </main>
   );

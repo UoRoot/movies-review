@@ -1,0 +1,41 @@
+/* FORMULARIO PARA FILTRAR PELICULAS */
+.formFilter {
+  padding: 10px 25px;
+  font-size: 17px;
+
+  &>h2 {
+    color: var(--text-color-2);
+    margin-bottom: 20px;
+  }
+}
+
+
+.btn-form {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.genres {
+  margin-bottom: 20px;
+
+  div {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  label {
+    border-radius: 8px;
+    background: #a7a7a7c5;
+    padding: 4px 8px;
+    display: inline-block;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  input {
+    display: none;
+  }
+}
