@@ -1,41 +1,83 @@
-/* FORMULARIO PARA FILTRAR PELICULAS */
+/* form to filter movies */
 .formFilter {
-  padding: 10px 25px;
-  font-size: 17px;
+  font-size: 16px;
 
   &>h2 {
-    color: var(--text-color-2);
+    color: #f2f2f2;
     margin-bottom: 20px;
   }
-}
 
-
-.btn-form {
-  display: flex;
-  justify-content: center;
-  padding: 5px 0;
+  strong {
+    color: #e0dfdf;
+    font-size: 18px;
+  }
 }
 
 .genres {
   margin-bottom: 20px;
 
-  div {
+  &>div {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  label {
+  span {
     border-radius: 8px;
+    overflow: hidden;
     background: #a7a7a7c5;
-    padding: 4px 8px;
-    display: inline-block;
     flex-grow: 1;
+  }
+
+  label {
+    display: block;
+    padding: 4px 8px;
     text-align: center;
+    cursor: pointer;
   }
 
   input {
     display: none;
+
+    &:checked+label {
+      background-color: #0090b0;
+      transition: background-color 0.3s ease-in-out;
+    }
   }
+}
+
+.years {
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  input {
+    padding: 4px 8px;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid;
+    border-radius: 6px;
+    color: #878787;
+    font-size: 16px;
+
+  }
+}
+
+.rating {
+  strong {
+    margin-bottom: 16px;
+  }
+
+  div {
+    max-width: 180px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
 }

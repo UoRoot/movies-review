@@ -1,7 +1,10 @@
-import { FilterMoviesParams } from "../types/local-type/media";
+import { FilterMoviesParams } from "../src/types/local-type/media";
 
-export function useMoviesQueryParams(): Partial<FilterMoviesParams> {
-  const params = new URLSearchParams(window.location.search);
+export function getMoviesQueryParams(
+  params: URLSearchParams
+): Partial<FilterMoviesParams> {
+  if (params.size === 0) return {};
+
   return {
     language: params.get("language") ?? undefined,
     page: params.get("page") ? Number(params.get("page")) : undefined,

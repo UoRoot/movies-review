@@ -1,15 +1,13 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { yearsfilter } from "../../../services/yearsFilter";
 import { getAllGenres } from "../../../services/getAllGenres";
 import { GenreType } from "../../../types/api-responses/genres";
 import Style from "./filter-form.module.css";
+import { useNavigate } from "react-router-dom";
 
-const FilterForm = () => {
-  const [rating, setRating] = useState("");
-  const [genres, setGenres] = useState<GenreType[]>([]);
+export function FilterForm() {
   const navigate = useNavigate();
-  const { years } = useMemo(() => yearsfilter(), []);
+  const [rating, setRating] = useState("7");
+  const [genres, setGenres] = useState<GenreType[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -31,50 +29,45 @@ const FilterForm = () => {
       if (year !== "" && year !== "all") params.append("year", year);
       if (selectedGenres.length > 0)
         params.append("with_genres", selectedGenres.join(" "));
-
       navigate(`/movies?${params.toString()}`);
     },
-    [navigate, rating]
+    [rating, navigate]
   );
 
   const renderedGenres = useMemo(
     () =>
       genres.map(({ id, name }) => (
-        <label key={id}>
-          {name}
-          <input type="checkbox" name="genres" value={id} />
-        </label>
+        <span key={id}>
+          <input id={id.toString()} type="checkbox" name="genres" value={id} />
+          <label htmlFor={id.toString()}>{name}</label>
+        </span>
       )),
     [genres]
   );
 
-  const renderedYears = useMemo(
-    () =>
-      years.map((year) => (
-        <option key={year} value={year.toString()}>
-          {year}
-        </option>
-      )),
-    [years]
-  );
-
   return (
-    <form className={Style.filterForm} onSubmit={(e) => handleSubmit(e)}>
+    <form className={Style.formFilter} onSubmit={handleSubmit}>
       <h2>Filtrar Películas</h2>
       <div className={Style.genres}>
         <strong>Géneros:</strong>
         <div>{renderedGenres}</div>
       </div>
 
-      <label htmlFor="year" className="form-flex">
-        <strong>Año:</strong>
-        <select id="year" name="year" className="options">
-          <option value="all">Todos</option>
-          {renderedYears}
-        </select>
-      </label>
+      <div className={Style.years}>
+        <label>
+          <strong>Año:</strong>
+          <input
+            id="yearInput"
+            type="number"
+            min="1970"
+            max={new Date().getFullYear()}
+            name="year"
+            placeholder="1970..."
+          />
+        </label>
+      </div>
 
-      <label htmlFor="rating" className="form-block">
+      <div className={Style.rating}>
         <strong>Calificación mínima:</strong>
         <div>
           <input
@@ -84,18 +77,17 @@ const FilterForm = () => {
             min="0.0"
             max="10"
             step="0.1"
+            value={rating}
             onChange={(event) => setRating(event.target.value)}
           />
           <span className="rating-value">{rating}</span>
         </div>
-      </label>
-      <div className="btn-form">
+      </div>
+      <div className="ct-center">
         <button type="submit" className="button">
           Filtrar
         </button>
       </div>
     </form>
   );
-};
-
-export default FilterForm;
+}

@@ -107,7 +107,7 @@ export const getUrlDiscoverMovies = (props: Partial<FilterMoviesParams>) => {
   }
 
   if (year) {
-    finalUrl += `&first_air_date_year=${year}`;
+    finalUrl += `&year=${year}`;
   }
 
   return finalUrl;
