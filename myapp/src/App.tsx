@@ -9,7 +9,7 @@ import { HomePage } from "./pages/HomePage.js";
 // import { NotFound } from "./components/NotFound.jsx";
 // import { SeriesPage } from "./pages/SeriesPage.jsx";
 // import { DetailsPageMovie } from "./pages/DetailsPageMovie.jsx";
-import { PeliculasPage } from "./pages/PeliculasPage";
+import { PeliculasPage } from "./pages/MoviesPage.tsx";
 // import { DetailsPageSerie } from "./pages/DetailsPageSerie.jsx";
 
 function App() {
