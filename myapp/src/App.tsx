@@ -1,6 +1,6 @@
 import "./App.css";
 import "./styles/layout-one.css";
-import { Header } from "./components/header.tsx";
+import Header from "./components/ui/header/header.tsx";
 import { Route, Routes } from "react-router-dom";
 import { SearchPage } from "./pages/SearchPage.js";
 import { HomePage } from "./pages/HomePage.js";
